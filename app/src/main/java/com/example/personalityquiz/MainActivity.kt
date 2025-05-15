@@ -5,17 +5,11 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.os.SystemClock
-import android.widget.ArrayAdapter
-import android.widget.Button
-import android.widget.Spinner
+import android.widget.*
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import android.widget.Chronometer
-import android.widget.LinearLayout
-import android.widget.TextView
-import android.widget.EditText
 
 class MainActivity : AppCompatActivity() {
 
@@ -24,8 +18,6 @@ class MainActivity : AppCompatActivity() {
 
     lateinit var timerTextView: TextView
     lateinit var mainLayout: LinearLayout
-
-    lateinit var editText: TextView
 
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,16 +29,6 @@ class MainActivity : AppCompatActivity() {
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
-        }
-
-        val editText = findViewById<EditText>(R.id.message_textview)
-        val quizEnd = findViewById<Button>(R.id.buttonQuizEnd)
-
-        quizEnd.setOnClickListener {
-            val message = editText.text.toString()
-            val intent = Intent(this, SummaryActivity::class.java)
-            intent.putExtra("EXTRA_MESSAGE", message)
-            startActivity(intent)
         }
 
         val spinner = findViewById<Spinner>(R.id.spinner)
@@ -73,8 +55,43 @@ class MainActivity : AppCompatActivity() {
                 timerTextView.text = "Koniec czasu"
             }
         }
-
         countDownTimer.start()
 
+        val quizEnd = findViewById<Button>(R.id.buttonQuizEnd)
+        quizEnd.setOnClickListener {
+            val intent = Intent(this, SummaryActivity::class.java)
+
+            intent.putExtra("checkbox1", findViewById<CheckBox>(R.id.checkBox1).isChecked)
+            intent.putExtra("checkbox2", findViewById<CheckBox>(R.id.checkBox2).isChecked)
+            intent.putExtra("checkbox3", findViewById<CheckBox>(R.id.checkBox3).isChecked)
+
+            val selectedSpinnerItem = spinner.selectedItem.toString()
+            intent.putExtra("spinnerItem", selectedSpinnerItem)
+
+            intent.putExtra("chronometerTime", chronometer.base)
+
+            val seekValue = findViewById<SeekBar>(R.id.seekBar).progress
+            intent.putExtra("seekValue", seekValue)
+
+            val radioGroup = findViewById<RadioGroup>(R.id.radioGroup)
+            val selectedRadioId = radioGroup.checkedRadioButtonId
+            val selectedRadioText = if (selectedRadioId != -1) {
+                findViewById<RadioButton>(selectedRadioId).text.toString()
+            } else {
+                "Nie wybrano"
+            }
+            intent.putExtra("radioSelection", selectedRadioText)
+
+            val datePicker = findViewById<DatePicker>(R.id.datePicker)
+            intent.putExtra("dateDay", datePicker.dayOfMonth)
+            intent.putExtra("dateMonth", datePicker.month)
+            intent.putExtra("dateYear", datePicker.year)
+
+            val timePicker = findViewById<TimePicker>(R.id.timePicker)
+            intent.putExtra("minuteTime", timePicker.minute)
+            intent.putExtra("hourTime", timePicker.hour)
+
+            startActivity(intent)
+        }
     }
 }
