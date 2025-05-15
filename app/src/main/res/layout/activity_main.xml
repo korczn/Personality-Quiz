@@ -15,22 +15,30 @@
 
         <TextView
             android:id="@+id/text1"
-            android:textSize="30dp"
-            android:layout_width="wrap_content"
+            android:textSize="50dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Personality Quiz" />
+            android:text="Personality Quiz"
+            android:textStyle="bold"
+            android:paddingLeft="10dp"
+            />
 
         <TextView
             android:id="@+id/text2"
-            android:layout_width="wrap_content"
+            android:textSize="20dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Czy lubisz pomidory?" />
+            android:text="Czy lubisz pomidory?"
+            android:paddingLeft="10dp"
+            />
 
         <RadioGroup
             android:id="@+id/radioGroup"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingLeft="10dp"
+            >
 
             <RadioButton
                 android:id="@+id/wybor1"
@@ -66,7 +74,7 @@
 
         <CheckBox
             android:id="@+id/checkBox1"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Czerwony"
             android:textColor="#005DFF"
@@ -74,7 +82,7 @@
 
         <CheckBox
             android:id="@+id/checkBox2"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Zielony"
             android:textColor="#FF0000"
@@ -82,7 +90,7 @@
 
         <CheckBox
             android:id="@+id/checkBox3"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Niebieski"
             android:textColor="#00AD1D"
@@ -135,8 +143,10 @@
             android:layout_height="wrap_content"
             android:text="Zakończ Test"
             android:padding="10dp"
-            android:background="#16B11D"
+            android:backgroundTint="#46BD14"
             android:textColor="#0A500D"
+            android:textStyle="bold"
+            android:textSize="25dp"
             />
 
     </LinearLayout>

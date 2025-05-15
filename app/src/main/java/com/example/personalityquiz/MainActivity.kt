@@ -59,6 +59,7 @@ class MainActivity : AppCompatActivity() {
 
         val quizEnd = findViewById<Button>(R.id.buttonQuizEnd)
         quizEnd.setOnClickListener {
+
             val intent = Intent(this, SummaryActivity::class.java)
 
             intent.putExtra("checkbox1", findViewById<CheckBox>(R.id.checkBox1).isChecked)
