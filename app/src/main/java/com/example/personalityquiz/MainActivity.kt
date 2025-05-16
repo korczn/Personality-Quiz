@@ -48,7 +48,7 @@ class MainActivity : AppCompatActivity() {
         val countDownTimer: CountDownTimer = object : CountDownTimer(30000, 1000) {
             override fun onTick(millisUntilFinished: Long) {
                 val secondsLeft = millisUntilFinished / 1000
-                timerTextView.text = "Pozostało $secondsLeft sekund"
+                timerTextView.text = "Pozostało $secondsLeft sekund..."
             }
 
             override fun onFinish() {
@@ -69,7 +69,9 @@ class MainActivity : AppCompatActivity() {
             val selectedSpinnerItem = spinner.selectedItem.toString()
             intent.putExtra("spinnerItem", selectedSpinnerItem)
 
-            intent.putExtra("chronometerTime", chronometer.base)
+            val elapsedMillis = SystemClock.elapsedRealtime() - chronometer.base
+            val elapsedSeconds = elapsedMillis / 1000
+            intent.putExtra("chronometerTime", elapsedSeconds)
 
             val seekValue = findViewById<SeekBar>(R.id.seekBar).progress
             intent.putExtra("seekValue", seekValue)

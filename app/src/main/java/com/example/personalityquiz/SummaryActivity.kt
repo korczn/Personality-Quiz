@@ -36,16 +36,33 @@ class SummaryActivity : AppCompatActivity() {
             checkbox3.takeIf { it }?.let { "Czerwony" }
         ).joinToString(", ")
 
+        var opis = "null";
+        if (seekValue == 0){
+            opis = "Jesteś zerem";
+        }else if (seekValue < 5 && seekValue > 0){
+            opis = "Jesteś okej pomidorkiem";
+        }else if (seekValue >= 5 && seekValue <= 7){
+            opis = "Jesteś dobrym pomidorkiem";
+        }else if (seekValue > 7 && seekValue < 10){
+            opis = "Jesteś cudnym pomidorkiem"
+        }else if (seekValue == 10){
+            opis = "Jesteś idealnym pomidorkiem"
+        }else{
+            opis = "Jesteś cw*lem"
+        }
+
         val resultSummary = """
         Wynik:
 
-        Zaznaczona odpowiedź: $radioSelection
-        Data: ${"%02d".format(day)}.${"%02d".format(month + 1)}.$year
-        Godzina: ${"%02d".format(hour)}:${"%02d".format(minute)}
-        Zaznaczone kolory: $selectedColors
-        Wybrana opcja ze spinnera: $spinnerItem
-        Wartość suwaka: $seekValue
-        Czas z chronometru: ${chronometerTime}ms
+        1. Data: ${"%02d".format(day)}.${"%02d".format(month + 1)}.$year
+        2. Godzina: ${"%02d".format(hour)}:${"%02d".format(minute)}
+        3. Zaznaczona odpowiedź: $radioSelection
+        4. Zaznaczone kolory: $selectedColors
+        5. Wartość suwaka: $seekValue
+        6. Wybrana opcja ze spinnera: $spinnerItem
+        7. Czas wykonania testu: ${chronometerTime}s
+        -----------------------------------------------------------------------
+        Twój opis: $opis!
         """.trimIndent()
 
         resultText.text = resultSummary
